@@ -1,0 +1,285 @@
+/* GLOBAL */
+:root {
+  --c-text: #121212;
+  --c-primary: #0067f4;
+  --c-section-even: #f4f6f7;
+  --c-dark: #222222;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--c-text);
+  overflow-x: hidden;
+}
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+}
+.btn {
+  --bs-btn-border-radius: 30px;
+  --bs-btn-padding-x: 2rem;
+  --bs-btn-padding-y: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.btn-primary {
+  --bs-btn-bg: var(--c-primary);
+}
+section:nth-of-type(2n) {
+  background-color: var(--c-section-even);
+}
+section:not(:nth-of-type(1)) {
+  padding-block: 100px;
+}
+a {
+  --bs-link-color-rgb: var(--c-text);
+  --bs-link-hover-color-rgb: var(--c-primary);
+  transition: all 0.3s ease-out;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--c-primary);
+}
+
+/* HEADER */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: all 0.3s ease-out 0s;
+  z-index: 9;
+}
+.header nav.navbar .nav-item a {
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  position: relative;
+  color: var(--c-text);
+}
+.header.sticky {
+  background: white;
+  position: fixed;
+  box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05);
+}
+.header nav.navbar .nav-item.active a,
+.header nav.navbar .nav-item:active a .header nav.navbar .nav-item:focus a,
+.header nav.navbar .nav-item:hover a {
+  color: var(--c-primary) !important;
+}
+.header nav.navbar .nav-item.active a::before,
+.header nav.navbar .nav-item:active a::before,
+.header nav.navbar .nav-item:focus a::before,
+.header nav.navbar .nav-item:hover a::before {
+  transform: translateX(-50%) scaleX(1);
+}
+.navbar-toggler {
+  --bs-border-width: 0;
+  font-size: 2rem;
+  color: white;
+}
+.header.sticky .navbar-toggler {
+  color: initial;
+}
+@media screen and (min-width: 768px) {
+  .header nav.navbar .nav-item a {
+    color: white;
+    margin: 0.75rem 0;
+  }
+  .header.sticky nav.navbar .nav-item a {
+    color: var(--c-text);
+  }
+  .header nav.navbar .nav-item a::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    height: 0.25rem;
+    background-color: var(--c-primary);
+    width: 2rem;
+    transform: translateX(-50%) scaleX(0);
+    transition: all 0.3s ease-in-out;
+  }
+}
+@media screen and (max-width: 767.99px) {
+  .navbar-collapse {
+    background: white;
+    margin-top: 1rem;
+  }
+}
+
+/* HOME */
+.banner-area {
+  background: url("../img/banner.jpg") no-repeat top right;
+  background-size: cover;
+  height: 800px;
+}
+.home__content {
+  padding-top: 275px;
+  color: white;
+  max-width: 900px;
+}
+.home__content p,
+.home__content h1 {
+  text-shadow: 1px 1px 2px var(--c-text);
+}
+.home__content h1 {
+  font-weight: 600;
+}
+.home__summary {
+  padding: 1.5rem;
+  border-radius: 5px;
+}
+
+/* CONTACT */
+.contact-info {
+  list-style: none;
+}
+.contact-info li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-block: 0.5rem;
+}
+.contact-info {
+  font-size: 1rem;
+}
+.contact-info i {
+  font-size: 1.5rem;
+}
+.form-input {
+  margin-bottom: 1rem;
+}
+.form-input label {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  margin-bottom: 0.5rem;
+}
+.form-input .input-items {
+  position: relative;
+}
+.form-input .input-items input,
+.form-input .input-items textarea {
+  width: 100%;
+  height: 2.75rem;
+  border: 2px solid #a4a4a4;
+  padding-left: 2.75rem;
+  padding-right: 0.75rem;
+}
+.form-input .input-items input:focus,
+.form-input .input-items textarea:focus {
+  outline-color: var(--c-primary);
+  border-color: var(--c-primary);
+}
+.form-input .input-items input:focus ~ i,
+.form-input .input-items textarea:focus ~ i {
+  color: var(--c-primary);
+}
+.form-input .input-items i {
+  position: absolute;
+  top: 0.4375rem;
+  left: 0.75rem;
+  font-size: 1.25rem;
+  color: #6c6c6c;
+  transition: all .3s ease-out;
+}
+.form-input .input-items textarea {
+  padding-top: 0.5rem;
+  height: 8.125rem;
+  width: 100%;
+}
+
+/* GALLERY */
+.portfolio-menu ul {
+  list-style: none;
+}
+.portfolio-menu ul li {
+  transition: all 0.3s ease-out;
+  text-transform: uppercase;
+}
+.portfolio-menu ul li:hover,
+.portfolio-menu ul li.active {
+  color: white;
+  background: var(--c-primary);
+  transition: all 0.3s ease-out;
+}
+.grid [class^="filter"] {
+  text-align: center;
+}
+.single-portfolio .portfolio-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: .5rem;
+}
+.single-portfolio .portfolio-image img {
+  width: 100%;
+  height: auto;
+  transition: all .3s ease-out;
+}
+.single-portfolio .portfolio-image .portfolio-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease-out 0s;
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(0.95);
+  border-radius: 0.5rem;
+}
+.single-portfolio:hover .portfolio-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+.single-portfolio .portfolio-image .portfolio-overlay .portfolio-content .portfolio-icon a {
+  color: white;
+  font-size: 3rem;
+}
+.single-portfolio .portfolio-image .portfolio-overlay .portfolio-content .portfolio-icon a:hover, 
+.single-portfolio .portfolio-image .portfolio-overlay .portfolio-content .portfolio-icon a:focus {
+  color: var(--c-primary);
+}
+
+/* FOOTER */
+footer {
+  padding-block: 2.5rem;
+  background: var(--c-dark);
+  color: rgba(255, 255, 255, 0.8);
+}
+footer .navbar-nav {
+  --bs-nav-link-hover-color: white;
+  --bs-nav-link-color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+footer a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+}
+footer a:hover {
+  color: white;
+}
+footer i.bi {
+  font-size: 1.25rem;
+}
+footer p {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+}
+footer hr {
+  opacity: 0.5;
+  width: 75%;
+  max-width: 400px;
+  margin-inline: auto;
+  margin-block: 2rem;
+}
