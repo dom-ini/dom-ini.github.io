@@ -28,6 +28,45 @@ function setNavItemActive(scroll) {
   });
 }
 
+function showBackToTopButton(scroll) {
+  const backToTop = document.getElementById("backToTop");
+  if (scroll > 600) {
+    backToTop.classList.remove("hide");
+  } else {
+    backToTop.classList.add("hide");
+  }
+}
+
+function formToJson(form) {
+  const formData = new FormData(form);
+  const jsonData = {};
+
+  for (const [key, value] of formData.entries()) {
+    jsonData[key] = value;
+  }
+
+  return JSON.stringify(jsonData);
+}
+
+function createAlert(message, type, placeholder) {
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = `
+      <div
+        class="alert alert-${type} alert-dismissible fade show"
+        role="alert"
+      >
+      ${message}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Zamknij"
+      ></button>
+    </div>
+  `;
+  placeholder.append(wrapper);
+}
+
 new WOW().init();
 
 const navLinks = [
@@ -52,6 +91,7 @@ navLinks.forEach(function (elem) {
 window.addEventListener("scroll", function (e) {
   const scrollY = window.scrollY;
   setStickyHeader(scrollY);
+  showBackToTopButton(scrollY);
   setNavItemActive(scrollY);
 });
 
@@ -79,4 +119,42 @@ imagesLoaded(gallery, function () {
       option.classList.add("active");
     });
   });
+});
+
+const form = document.getElementById("contact-form");
+const alertPlaceholder = document.getElementById("contactAlert");
+const formSubmitBtn = document.querySelector(
+  '.contact-form button[type="submit"]'
+);
+const formSubmitBtnText = formSubmitBtn.querySelector(".text-content");
+const formSubmitBtnLoader = formSubmitBtn.querySelector(".spinner-border");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  formSubmitBtnText.classList.add("invisible");
+  formSubmitBtnLoader.classList.remove("d-none");
+
+  const jsonData = formToJson(form);
+
+  fetch(form.action, {
+    method: form.method,
+    body: jsonData,
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((response) => response.json())
+    .then(() => {
+      form.reset();
+      createAlert("Wiadomość została wysłana!", "success", alertPlaceholder);
+      alertPlaceholder.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    })
+    .finally(() => {
+      formSubmitBtnText.classList.remove("invisible");
+      formSubmitBtnLoader.classList.add("d-none");
+    });
 });
